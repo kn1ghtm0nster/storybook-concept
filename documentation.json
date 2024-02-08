@@ -221,6 +221,94 @@
             }
         },
         {
+            "name": "GeneralDialogComponent",
+            "id": "component-GeneralDialogComponent-ecbc8cdb4587982bc06368ef8cb8026431f2c550fd313c74e0985baec3642859535bf84318510f1c4a7bd5ffe5f93028f55d1028d28b13e99e802d30a3677bec",
+            "file": "src/app/shared/dialogs/general-dialog/general-dialog.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-general-dialog",
+            "styleUrls": [
+                "./general-dialog.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./general-dialog.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-general-dialog',\n  templateUrl: './general-dialog.component.html',\n  styleUrls: ['./general-dialog.component.scss']\n})\nexport class GeneralDialogComponent {\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./general-dialog.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<p>general-dialog works!</p>\n"
+        },
+        {
+            "name": "GeneralGridComponent",
+            "id": "component-GeneralGridComponent-a26b1341fc8965969548d83053c4d7adfea9193b0a2240eac3875508f318dcfb27fd16010da14dd46b1e69ca215b553f2d667d0b164d1570619c51d5cf93fa7d",
+            "file": "src/app/shared/grids/general-grid/general-grid.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-general-grid",
+            "styleUrls": [
+                "./general-grid.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./general-grid.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-general-grid',\n  templateUrl: './general-grid.component.html',\n  styleUrls: ['./general-grid.component.scss']\n})\nexport class GeneralGridComponent {\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./general-grid.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<p>general-grid works!</p>\n"
+        },
+        {
             "name": "HeaderComponent",
             "id": "component-HeaderComponent-cad94b233ec8e80ceb541e7972c5f9737e08237b4e137112f3987ca48ee0cce5c0d57798d41daa5d4d24d6bdbb2df1606ab68cca2aa0a1785e38f99f3cac0729",
             "file": "src/stories/header.component.ts",
@@ -403,13 +491,13 @@
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-b0bb343999c0401a2e3ecbec65490c5a76866396b25cae82ed79702c1d4e115033ea8c8ade9395518e8eba42217f2ec5d6c7a62f3d969b3ab2838fe206d56a66",
+            "id": "module-AppModule-5b4a1a1afd8dd836d52bcf451587f47b30515794ec3eec32635ab1222027f9f2a39feedd06abd06549bffb537176c80791b8e65ae4d289e22641ab1e24df5898",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\n\n@NgModule({\n  declarations: [\n    AppComponent\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { GeneralGridComponent } from './shared/grids/general-grid/general-grid.component';\nimport { GeneralDialogComponent } from './shared/dialogs/general-dialog/general-dialog.component';\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    GeneralGridComponent,\n    GeneralDialogComponent\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -420,6 +508,12 @@
                     "elements": [
                         {
                             "name": "AppComponent"
+                        },
+                        {
+                            "name": "GeneralDialogComponent"
+                        },
+                        {
+                            "name": "GeneralGridComponent"
                         }
                     ]
                 },
@@ -489,6 +583,16 @@
     "miscellaneous": {
         "variables": [
             {
+                "name": "BaseGeneralGridStory",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/grid.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n}"
+            },
+            {
                 "name": "Large",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -547,6 +651,16 @@
                 "deprecationMessage": "",
                 "type": "Meta<ButtonComponent>",
                 "defaultValue": "{\n  title: 'Example/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  render: (args: ButtonComponent) => ({\n    props: {\n      backgroundColor: null,\n      ...args,\n    },\n  }),\n  argTypes: {\n    backgroundColor: {\n      control: 'color',\n    },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/grid.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<GeneralGridComponent>",
+                "defaultValue": "{\n  component: GeneralGridComponent,\n}"
             },
             {
                 "name": "meta",
@@ -626,6 +740,17 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<GeneralGridComponent>",
+                "file": "src/stories/grid.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<HeaderComponent>",
                 "file": "src/stories/header.stories.ts",
                 "deprecated": false,
@@ -647,6 +772,28 @@
         ],
         "enumerations": [],
         "groupedVariables": {
+            "src/stories/grid.stories.ts": [
+                {
+                    "name": "BaseGeneralGridStory",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/grid.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/grid.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<GeneralGridComponent>",
+                    "defaultValue": "{\n  component: GeneralGridComponent,\n}"
+                }
+            ],
             "src/stories/button.stories.ts": [
                 {
                     "name": "Large",
@@ -792,6 +939,19 @@
                     "kind": 183
                 }
             ],
+            "src/stories/grid.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<GeneralGridComponent>",
+                    "file": "src/stories/grid.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
             "src/stories/header.stories.ts": [
                 {
                     "name": "Story",
@@ -835,7 +995,7 @@
         ]
     },
     "coverage": {
-        "count": 4,
+        "count": 3,
         "status": "low",
         "files": [
             {
@@ -855,6 +1015,24 @@
                 "name": "AppComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/dialogs/general-dialog/general-dialog.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "GeneralDialogComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/grids/general-grid/general-grid.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "GeneralGridComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -912,6 +1090,26 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Small",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/grid.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "BaseGeneralGridStory",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/grid.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
