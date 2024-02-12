@@ -2,6 +2,363 @@
     "pipes": [],
     "interfaces": [
         {
+            "name": "DialogInput",
+            "id": "interface-DialogInput-2cf066f77d3837cf8ab338ae17d07ce4d5cab51b5fefc8fe85e2725ca0b99f469d3c1ccc00eb047027f3374b8528747f21f62d323f5ad982265a3db0f281c34d",
+            "file": "src/app/interfaces/dialog.interface.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Type } from '@angular/core';\n\nexport interface DialogInput {\n  title: string;\n  component?: Type<any>;\n}\n",
+            "properties": [
+                {
+                    "name": "component",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Type<any>",
+                    "optional": true,
+                    "description": "",
+                    "line": 5
+                },
+                {
+                    "name": "title",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "GridConfig",
+            "id": "interface-GridConfig-e44d2cf4e3871173ee26dbe019a75f14147fd35d0690a50748d936471d4ef2c8a381982e63a231a5ebbe4dc5e86eb5566addccec08a9f3aea92f445f5af67795",
+            "file": "src/app/interfaces/grid.interface.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { GridOptions } from 'ag-grid-community';\n\nexport enum GridToolBar {\n  TopRow = 'showTopRow',\n  BottomRow = 'showBottomRow',\n  DocsLink = 'showDocsLink',\n}\n\nexport interface GridConfig<T> {\n  page: string;\n  dialogGrid: boolean;\n  numericOrdering: boolean;\n  gridOptions: GridOptions;\n  rows: T[];\n  mode?: {\n    view?: boolean;\n    edit?: boolean;\n    new?: boolean;\n  };\n}\n",
+            "properties": [
+                {
+                    "name": "dialogGrid",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                },
+                {
+                    "name": "gridOptions",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "GridOptions",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "mode",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type",
+                    "optional": true,
+                    "description": "",
+                    "line": 15
+                },
+                {
+                    "name": "numericOrdering",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                },
+                {
+                    "name": "page",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "rows",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "T[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "GridEventObject",
+            "id": "interface-GridEventObject-0c99f64b7062a94b6b67c598ed52e45d65309c3b9ed5f0e3f79ec115f3e1d767111d7a956853cf21e7f14fcb24c7055502013f5df27e43e757780642cb616c31",
+            "file": "src/app/interfaces/events.interface.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface GridEventObject<T> {\n  gridLocation?: {\n    firstPage?: boolean;\n    secondPage?: boolean;\n    dialog?: boolean;\n  };\n  type: {\n    selectedInput?: string;\n    add?: boolean;\n    update?: boolean;\n    remove?: boolean;\n  };\n  singleRow?: T;\n  rowsSelected?: T[];\n  updatedRowData?: T[];\n}\n",
+            "properties": [
+                {
+                    "name": "gridLocation",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type",
+                    "optional": true,
+                    "description": "",
+                    "line": 2
+                },
+                {
+                    "name": "rowsSelected",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "T[]",
+                    "optional": true,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "singleRow",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "T",
+                    "optional": true,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type",
+                    "optional": false,
+                    "description": "",
+                    "line": 7
+                },
+                {
+                    "name": "updatedRowData",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "T[]",
+                    "optional": true,
+                    "description": "",
+                    "line": 15
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "RowStrategy",
+            "id": "interface-RowStrategy-88baa0ce15efb073c2245706c54b6d3d30e9518d71bd6890bdc3c5b2dc29596388bee3aa333840cf4f6d07d7adcead9f5cb812e759cbf64ed90987fb3a276a87",
+            "file": "src/app/interfaces/row-strategy.interface.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { GridApi } from 'ag-grid-community';\n\nexport interface RowStrategy<T> {\n  addRow(\n    gridApi: GridApi,\n    rowData: T[],\n    orderedGrid?: boolean,\n    columns?: T[]\n  ): T[];\n  removeRow(gridApi: GridApi, rowData: T[], rowsToRemove?: T[]): T[];\n  updateRowOrder(gridApi: GridApi, rowData: T[]): T[];\n}\n",
+            "properties": [],
+            "indexSignatures": [],
+            "kind": 173,
+            "methods": [
+                {
+                    "name": "addRow",
+                    "args": [
+                        {
+                            "name": "gridApi",
+                            "type": "GridApi",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "rowData",
+                            "type": "T[]",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "orderedGrid",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        },
+                        {
+                            "name": "columns",
+                            "type": "T[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "T[]",
+                    "typeParameters": [],
+                    "line": 4,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "gridApi",
+                            "type": "GridApi",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "rowData",
+                            "type": "T[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "orderedGrid",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "columns",
+                            "type": "T[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "removeRow",
+                    "args": [
+                        {
+                            "name": "gridApi",
+                            "type": "GridApi",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "rowData",
+                            "type": "T[]",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "rowsToRemove",
+                            "type": "T[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "T[]",
+                    "typeParameters": [],
+                    "line": 10,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "gridApi",
+                            "type": "GridApi",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "rowData",
+                            "type": "T[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "rowsToRemove",
+                            "type": "T[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "updateRowOrder",
+                    "args": [
+                        {
+                            "name": "gridApi",
+                            "type": "GridApi",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "rowData",
+                            "type": "T[]",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "T[]",
+                    "typeParameters": [],
+                    "line": 11,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "gridApi",
+                            "type": "GridApi",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "rowData",
+                            "type": "T[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "extends": []
+        },
+        {
             "name": "User",
             "id": "interface-User-d4821beac0e4a852e513391b7470981c4353fdd95a18628bb68136c8695b489ee15b926e2e5031bc26cf30e1508e0a362c3ee13a06734702b4d15af140e485d5",
             "file": "src/stories/user.ts",
@@ -222,7 +579,7 @@
         },
         {
             "name": "GeneralDialogComponent",
-            "id": "component-GeneralDialogComponent-ecbc8cdb4587982bc06368ef8cb8026431f2c550fd313c74e0985baec3642859535bf84318510f1c4a7bd5ffe5f93028f55d1028d28b13e99e802d30a3677bec",
+            "id": "component-GeneralDialogComponent-19f0cf6d41252171d24406688f8863b633244032a582527e41d983e4272952ee524f44b297dd7fa9af9308f9727bce85bb0d2c2df288d3f9a2c54ca8f91f43aa",
             "file": "src/app/shared/dialogs/general-dialog/general-dialog.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -239,10 +596,79 @@
             ],
             "viewProviders": [],
             "hostDirectives": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
+            "inputsClass": [
+                {
+                    "name": "dialogInput",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 21,
+                    "type": "DialogInput | null",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "cancel",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 24,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "save",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 23,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "dynamicComponent",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Type<any> | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 27
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 34,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onCancel",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 43,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onSave",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 38,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -252,7 +678,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-general-dialog',\n  templateUrl: './general-dialog.component.html',\n  styleUrls: ['./general-dialog.component.scss']\n})\nexport class GeneralDialogComponent {\n\n}\n",
+            "sourceCode": "import {\n  Component,\n  OnInit,\n  Input,\n  Output,\n  EventEmitter,\n  ViewChild,\n  ComponentFactoryResolver,\n  Type,\n} from '@angular/core';\nimport { MatDialogRef } from '@angular/material/dialog';\n\nimport { DialogInput } from '../../../interfaces/dialog.interface';\n\n@Component({\n  selector: 'app-general-dialog',\n  templateUrl: './general-dialog.component.html',\n  styleUrls: ['./general-dialog.component.scss'],\n})\nexport class GeneralDialogComponent implements OnInit {\n  @Input() dialogInput: DialogInput | null = null;\n\n  @Output() save = new EventEmitter<void>();\n  @Output() cancel = new EventEmitter<void>();\n\n  // contains the component to be rendered dynamically\n  dynamicComponent: Type<any> | null = null;\n\n  constructor(\n    private dialogRef: MatDialogRef<GeneralDialogComponent>,\n    private resolver: ComponentFactoryResolver\n  ) {}\n\n  ngOnInit(): void {\n    this.dynamicComponent = this.dialogInput?.component || null;\n  }\n\n  onSave(): void {\n    this.save.emit();\n    this.dialogRef.close();\n  }\n\n  onCancel(): void {\n    this.cancel.emit();\n    this.dialogRef.close();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -261,8 +687,52 @@
                 }
             ],
             "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "dialogRef",
+                        "type": "MatDialogRef<GeneralDialogComponent>",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "resolver",
+                        "type": "ComponentFactoryResolver",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 27,
+                "jsdoctags": [
+                    {
+                        "name": "dialogRef",
+                        "type": "MatDialogRef<GeneralDialogComponent>",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "resolver",
+                        "type": "ComponentFactoryResolver",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
             "extends": [],
-            "templateData": "<p>general-dialog works!</p>\n"
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div class=\"top-row\">\n    <h2 mat-dialog-title>\n        {{ dialogInput?.title }}\n    </h2>\n\n    <mat-dialog-actions>\n        <button mat-button>Cancel</button>\n        <button mat-button>Save</button>\n    </mat-dialog-actions>\n</div>\n\n<ng-template #dialogContent></ng-template>"
         },
         {
             "name": "GeneralGridComponent",
@@ -306,7 +776,7 @@
             ],
             "stylesData": "",
             "extends": [],
-            "templateData": "<p>general-grid works!</p>\n"
+            "templateData": "<div class=\"grid-container\">\n    <div class=\"top-row-container\">\n        <div>\n            <button> Edit </button>\n        </div>\n\n        <div>\n            <button>Remove</button>\n            <button>Add</button>\n        </div>\n\n        <div>\n            <button>\n                View\n            </button>\n        </div>\n    </div>\n\n    <ag-grid-angular></ag-grid-angular>\n</div>"
         },
         {
             "name": "HeaderComponent",
@@ -491,13 +961,13 @@
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-5b4a1a1afd8dd836d52bcf451587f47b30515794ec3eec32635ab1222027f9f2a39feedd06abd06549bffb537176c80791b8e65ae4d289e22641ab1e24df5898",
+            "id": "module-AppModule-60cdc5e25b4a1ec855912471dca2d7db36756a444126e3e495a5ac4d0183fbc82922d7173c2bd9eda7611f7decf4c9d13958e352d63d1fe2646b61411422b245",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { GeneralGridComponent } from './shared/grids/general-grid/general-grid.component';\nimport { GeneralDialogComponent } from './shared/dialogs/general-dialog/general-dialog.component';\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    GeneralGridComponent,\n    GeneralDialogComponent\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { AgGridModule } from 'ag-grid-angular';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatDialogModule } from '@angular/material/dialog';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { GeneralGridComponent } from './shared/grids/general-grid/general-grid.component';\nimport { GeneralDialogComponent } from './shared/dialogs/general-dialog/general-dialog.component';\n\n@NgModule({\n  declarations: [AppComponent, GeneralGridComponent, GeneralDialogComponent],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    BrowserAnimationsModule,\n    AgGridModule,\n    MatButtonModule,\n    MatDialogModule,\n  ],\n  providers: [],\n  bootstrap: [AppComponent],\n})\nexport class AppModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -578,19 +1048,115 @@
                     "elements": []
                 }
             ]
+        },
+        {
+            "name": "DialogStoryBookModule",
+            "id": "module-DialogStoryBookModule-63562d7ea315a89af8a02f85ab2f3857f8875ed72a086a14847e734edb8f0a646fa5930a70ffb88eaf29ba0d3cf9ddace411612be4efcf8a3249706df535fcc8",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/stories/components/dialog.stories.ts",
+            "methods": [],
+            "sourceCode": "import { Component, Injector, NgModule } from '@angular/core';\nimport { Meta, StoryObj, moduleMetadata } from '@storybook/angular';\n\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport {\n  MatDialogModule,\n  MatDialog,\n  MatDialogRef,\n} from '@angular/material/dialog';\n\nimport { GeneralDialogComponent } from '../../app/shared/dialogs/general-dialog/general-dialog.component';\nimport { GeneralGridComponent } from '../../app/shared/grids/general-grid/general-grid.component';\n\n@NgModule({\n  declarations: [],\n  imports: [BrowserAnimationsModule, MatDialogModule],\n})\nclass DialogStoryBookModule {}\n\nconst meta: Meta<GeneralDialogComponent> = {\n  title: 'General Dialog',\n  component: GeneralDialogComponent,\n  decorators: [\n    moduleMetadata({\n      declarations: [],\n      imports: [\n        DialogStoryBookModule,\n        MatDialogModule,\n        BrowserAnimationsModule,\n      ],\n      providers: [\n        {\n          provide: MatDialogRef,\n          useValue: {},\n        },\n        MatDialog,\n      ],\n    }),\n  ],\n  argTypes: {},\n};\n\nexport default meta;\n\nexport const BaseGeneralDialogStory: StoryObj<GeneralDialogComponent> = {\n  args: {\n    dialogInput: {\n      title: 'Dialog Title Here',\n      component: GeneralGridComponent,\n    },\n  },\n};\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
         }
     ],
     "miscellaneous": {
         "variables": [
             {
+                "name": "BaseGeneralDialogStory",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/components/dialog.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<GeneralDialogComponent>",
+                "defaultValue": "{\n  args: {\n    dialogInput: {\n      title: 'Dialog Title Here',\n      component: GeneralGridComponent,\n    },\n  },\n}"
+            },
+            {
                 "name": "BaseGeneralGridStory",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/grid.stories.ts",
+                "file": "src/stories/components/grid.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {},\n}"
+            },
+            {
+                "name": "defaultColumnConfiguration",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/shared/variables/main-grid.variables.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "ColDef",
+                "defaultValue": "{\n  sortable: true,\n  resizable: true,\n  wrapText: true,\n  tooltipValueGetter: (params: any): string => {\n    return params.value;\n  },\n}"
+            },
+            {
+                "name": "defaultColumns",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/shared/variables/main-grid.variables.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "ColDef[]",
+                "defaultValue": "[\n  {\n    rowDrag: true,\n    minWidth: 35,\n  },\n  {\n    headerName: '',\n    field: 'ckBox',\n    maxWidth: 35,\n    headerCheckboxSelection: true,\n    checkboxSelection: true,\n  },\n]"
+            },
+            {
+                "name": "defaultGridConfig",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/shared/variables/main-grid.variables.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "GridConfig<any>",
+                "defaultValue": "{\n  page: '',\n  dialogGrid: false,\n  numericOrdering: true,\n  gridOptions: defaultGridOptions,\n  rows: [],\n}"
+            },
+            {
+                "name": "defaultGridOptions",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/shared/variables/main-grid.variables.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "GridOptions",
+                "defaultValue": "{\n  defaultColDef: defaultColumnConfiguration,\n  onFirstDataRendered: onFirstDataRendered,\n  cacheQuickFilter: true,\n  rowSelection: 'multiple',\n  enableBrowserTooltips: true,\n  overlayLoadingTemplate:\n    '<span class=\"ag-overlay-loading-center\">Please wait while data loads</span>',\n  headerHeight: 25,\n  rowHeight: 40,\n}"
+            },
+            {
+                "name": "defaultOnGridReady",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/shared/variables/main-grid.variables.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "(params: FirstDataRenderedEvent): void => {\n  params.api!.hideOverlay();\n}"
             },
             {
                 "name": "Large",
@@ -656,16 +1222,6 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/grid.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<GeneralGridComponent>",
-                "defaultValue": "{\n  component: GeneralGridComponent,\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/stories/header.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -681,6 +1237,36 @@
                 "deprecationMessage": "",
                 "type": "Meta<PageComponent>",
                 "defaultValue": "{\n  title: 'Example/Page',\n  component: PageComponent,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/components/dialog.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<GeneralDialogComponent>",
+                "defaultValue": "{\n  title: 'General Dialog',\n  component: GeneralDialogComponent,\n  decorators: [\n    moduleMetadata({\n      declarations: [],\n      imports: [\n        DialogStoryBookModule,\n        MatDialogModule,\n        BrowserAnimationsModule,\n      ],\n      providers: [\n        {\n          provide: MatDialogRef,\n          useValue: {},\n        },\n        MatDialog,\n      ],\n    }),\n  ],\n  argTypes: {},\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/components/grid.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<GeneralGridComponent>",
+                "defaultValue": "{\n  component: GeneralGridComponent,\n}"
+            },
+            {
+                "name": "onFirstDataRendered",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/shared/variables/main-grid.variables.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "(params: FirstDataRenderedEvent): void => {\n  params.api!.hideOverlay();\n  params.api.autoSizeAllColumns(); // prior to v31 -> params.columnApi.autoSizeAllColumns();\n}"
             },
             {
                 "name": "preview",
@@ -740,17 +1326,6 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<GeneralGridComponent>",
-                "file": "src/stories/grid.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
                 "rawtype": "StoryObj<HeaderComponent>",
                 "file": "src/stories/header.stories.ts",
                 "deprecated": false,
@@ -768,16 +1343,79 @@
                 "deprecationMessage": "",
                 "description": "",
                 "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<GeneralGridComponent>",
+                "file": "src/stories/components/grid.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
             }
         ],
-        "enumerations": [],
+        "enumerations": [
+            {
+                "name": "GridToolBar",
+                "childs": [
+                    {
+                        "name": "TopRow",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "showTopRow"
+                    },
+                    {
+                        "name": "BottomRow",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "showBottomRow"
+                    },
+                    {
+                        "name": "DocsLink",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "showDocsLink"
+                    }
+                ],
+                "ctype": "miscellaneous",
+                "subtype": "enum",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "file": "src/app/interfaces/grid.interface.ts"
+            }
+        ],
         "groupedVariables": {
-            "src/stories/grid.stories.ts": [
+            "src/stories/components/dialog.stories.ts": [
+                {
+                    "name": "BaseGeneralDialogStory",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/components/dialog.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<GeneralDialogComponent>",
+                    "defaultValue": "{\n  args: {\n    dialogInput: {\n      title: 'Dialog Title Here',\n      component: GeneralGridComponent,\n    },\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/components/dialog.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<GeneralDialogComponent>",
+                    "defaultValue": "{\n  title: 'General Dialog',\n  component: GeneralDialogComponent,\n  decorators: [\n    moduleMetadata({\n      declarations: [],\n      imports: [\n        DialogStoryBookModule,\n        MatDialogModule,\n        BrowserAnimationsModule,\n      ],\n      providers: [\n        {\n          provide: MatDialogRef,\n          useValue: {},\n        },\n        MatDialog,\n      ],\n    }),\n  ],\n  argTypes: {},\n}"
+                }
+            ],
+            "src/stories/components/grid.stories.ts": [
                 {
                     "name": "BaseGeneralGridStory",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/stories/grid.stories.ts",
+                    "file": "src/stories/components/grid.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
@@ -787,11 +1425,73 @@
                     "name": "meta",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/stories/grid.stories.ts",
+                    "file": "src/stories/components/grid.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<GeneralGridComponent>",
                     "defaultValue": "{\n  component: GeneralGridComponent,\n}"
+                }
+            ],
+            "src/app/shared/variables/main-grid.variables.ts": [
+                {
+                    "name": "defaultColumnConfiguration",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/shared/variables/main-grid.variables.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ColDef",
+                    "defaultValue": "{\n  sortable: true,\n  resizable: true,\n  wrapText: true,\n  tooltipValueGetter: (params: any): string => {\n    return params.value;\n  },\n}"
+                },
+                {
+                    "name": "defaultColumns",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/shared/variables/main-grid.variables.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ColDef[]",
+                    "defaultValue": "[\n  {\n    rowDrag: true,\n    minWidth: 35,\n  },\n  {\n    headerName: '',\n    field: 'ckBox',\n    maxWidth: 35,\n    headerCheckboxSelection: true,\n    checkboxSelection: true,\n  },\n]"
+                },
+                {
+                    "name": "defaultGridConfig",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/shared/variables/main-grid.variables.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "GridConfig<any>",
+                    "defaultValue": "{\n  page: '',\n  dialogGrid: false,\n  numericOrdering: true,\n  gridOptions: defaultGridOptions,\n  rows: [],\n}"
+                },
+                {
+                    "name": "defaultGridOptions",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/shared/variables/main-grid.variables.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "GridOptions",
+                    "defaultValue": "{\n  defaultColDef: defaultColumnConfiguration,\n  onFirstDataRendered: onFirstDataRendered,\n  cacheQuickFilter: true,\n  rowSelection: 'multiple',\n  enableBrowserTooltips: true,\n  overlayLoadingTemplate:\n    '<span class=\"ag-overlay-loading-center\">Please wait while data loads</span>',\n  headerHeight: 25,\n  rowHeight: 40,\n}"
+                },
+                {
+                    "name": "defaultOnGridReady",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/shared/variables/main-grid.variables.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(params: FirstDataRenderedEvent): void => {\n  params.api!.hideOverlay();\n}"
+                },
+                {
+                    "name": "onFirstDataRendered",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/shared/variables/main-grid.variables.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(params: FirstDataRenderedEvent): void => {\n  params.api!.hideOverlay();\n  params.api.autoSizeAllColumns(); // prior to v31 -> params.columnApi.autoSizeAllColumns();\n}"
                 }
             ],
             "src/stories/button.stories.ts": [
@@ -924,7 +1624,39 @@
             ]
         },
         "groupedFunctions": {},
-        "groupedEnumerations": {},
+        "groupedEnumerations": {
+            "src/app/interfaces/grid.interface.ts": [
+                {
+                    "name": "GridToolBar",
+                    "childs": [
+                        {
+                            "name": "TopRow",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "showTopRow"
+                        },
+                        {
+                            "name": "BottomRow",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "showBottomRow"
+                        },
+                        {
+                            "name": "DocsLink",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "showDocsLink"
+                        }
+                    ],
+                    "ctype": "miscellaneous",
+                    "subtype": "enum",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "file": "src/app/interfaces/grid.interface.ts"
+                }
+            ]
+        },
         "groupedTypeAliases": {
             "src/stories/button.stories.ts": [
                 {
@@ -933,19 +1665,6 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<ButtonComponent>",
                     "file": "src/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "src/stories/grid.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<GeneralGridComponent>",
-                    "file": "src/stories/grid.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -977,6 +1696,19 @@
                     "description": "",
                     "kind": 183
                 }
+            ],
+            "src/stories/components/grid.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<GeneralGridComponent>",
+                    "file": "src/stories/components/grid.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
             ]
         }
     },
@@ -995,7 +1727,7 @@
         ]
     },
     "coverage": {
-        "count": 3,
+        "count": 2,
         "status": "low",
         "files": [
             {
@@ -1018,12 +1750,48 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/interfaces/dialog.interface.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DialogInput",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/interfaces/events.interface.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "GridEventObject",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/interfaces/grid.interface.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "GridConfig",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/interfaces/row-strategy.interface.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "RowStrategy",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/shared/dialogs/general-dialog/general-dialog.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "GeneralDialogComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "coverageCount": "0/9",
                 "status": "low"
             },
             {
@@ -1031,6 +1799,66 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "GeneralGridComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/variables/main-grid.variables.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "defaultColumnConfiguration",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/variables/main-grid.variables.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "defaultColumns",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/variables/main-grid.variables.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "defaultGridConfig",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/variables/main-grid.variables.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "defaultGridOptions",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/variables/main-grid.variables.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "defaultOnGridReady",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/variables/main-grid.variables.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "onFirstDataRendered",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -1095,7 +1923,27 @@
                 "status": "low"
             },
             {
-                "filePath": "src/stories/grid.stories.ts",
+                "filePath": "src/stories/components/dialog.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "BaseGeneralDialogStory",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/components/dialog.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/components/grid.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -1105,7 +1953,7 @@
                 "status": "low"
             },
             {
-                "filePath": "src/stories/grid.stories.ts",
+                "filePath": "src/stories/components/grid.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
