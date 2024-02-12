@@ -1,1 +1,12 @@
-<p>general-dialog works!</p>
+<div class="dialog-header-row">
+    <h2 mat-dialog-title>
+        {{ dialogInput?.title }}
+    </h2>
+
+    <mat-dialog-actions>
+        <button mat-flat-button color="warn" style="margin-right: 0.3rem">Cancel</button>
+        <button mat-flat-button color="primary" style="margin-left: 0.3rem">Save</button>
+    </mat-dialog-actions>
+</div>
+
+<ng-template #dialogContent></ng-template>
