@@ -45,4 +45,16 @@ export class GeneralGridComponent<T> implements OnInit {
 
     params.api.hideOverlay();
   }
+
+  public onEditClicked(): void {
+    // single row selection scenario if applicable
+    let selectedNodes = this.gridApi?.getSelectedNodes() || [];
+    const selectedRows = selectedNodes.map((node) => node.data) || [];
+
+    if (selectedRows.length > 0 && this.gridConfig?.actions?.onEdit) {
+      this.gridConfig.actions.onEdit(selectedRows[0]);
+    } else if (this.gridConfig?.actions?.onEdit) {
+      this.gridConfig.actions.onEdit(selectedRows);
+    }
+  }
 }

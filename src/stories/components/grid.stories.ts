@@ -1,4 +1,5 @@
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
+import { action } from '@storybook/addon-actions';
 import { AgGridModule } from 'ag-grid-angular';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -33,4 +34,20 @@ export const DefaultGridUseCase: Story = {
       gridOptions: { ...defaultGridConfig.gridOptions },
     },
   },
+};
+
+export const EditEtlGridUseCase: Story = {
+  args: {
+    gridConfig: {
+      ...defaultGridConfig,
+      gridOptions: { ...defaultGridConfig.gridOptions },
+      actions: {
+        onEdit: () => {
+          action('ETL Dialog Opened');
+          console.log('ETL Dialog Opened');
+        },
+      },
+    },
+  },
+  name: 'Grid with Edit button for ETL Dialog',
 };
