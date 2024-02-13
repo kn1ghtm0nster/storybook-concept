@@ -16,5 +16,8 @@
         </div>
     </div>
 
-    <ag-grid-angular></ag-grid-angular>
+    <ag-grid-angular style="height: 350px; width: 100%;" class="ag-theme-alpine" [gridOptions]="gridConfig?.gridOptions"
+        [rowData]="gridConfig?.rows" [columnDefs]="gridConfig?.gridOptions?.columnDefs"
+        [defaultColDef]="gridConfig?.gridOptions?.defaultColDef" (gridReady)="onGridReady($event)"
+        (firstDataRendered)="gridConfig?.gridOptions?.onFirstDataRendered($event)"></ag-grid-angular>
 </div>
