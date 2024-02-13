@@ -4,8 +4,8 @@
     </h2>
 
     <mat-dialog-actions>
-        <button mat-flat-button color="warn" style="margin-right: 0.3rem">Cancel</button>
-        <button mat-flat-button color="primary" style="margin-left: 0.3rem">Save</button>
+        <button mat-flat-button color="warn" (click)="onCancel()" style="margin-right: 0.3rem">Cancel</button>
+        <button mat-flat-button color="primary" (click)="onSave()" style="margin-left: 0.3rem">Save</button>
     </mat-dialog-actions>
 </div>
 
