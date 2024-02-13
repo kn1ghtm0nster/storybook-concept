@@ -821,7 +821,7 @@
         },
         {
             "name": "GeneralDialogComponent",
-            "id": "component-GeneralDialogComponent-68f49609748552c6119d7b079d12dbdbcf80b9e1d5fce21ae5fddf48faf3ccc242bc12f7ebea518594d813fe34b98f28b0458befb1e8cfff2367665979f0c6f3",
+            "id": "component-GeneralDialogComponent-7d9bff8b25b7dc2728282936cac3d465b115f9ae9aacf0b123ddfbb1c7ff95760856e2c521082494baa1eec30cc9877f8a0056720bab230994fd2a67f15f8801",
             "file": "src/app/shared/dialogs/general-dialog/general-dialog.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -844,7 +844,7 @@
                     "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 23,
+                    "line": 25,
                     "type": "DialogInput | null",
                     "decorators": []
                 }
@@ -855,7 +855,7 @@
                     "defaultValue": "new EventEmitter<void>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
+                    "line": 28,
                     "type": "EventEmitter"
                 },
                 {
@@ -863,7 +863,7 @@
                     "defaultValue": "new EventEmitter<void>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 25,
+                    "line": 27,
                     "type": "EventEmitter"
                 }
             ],
@@ -875,7 +875,7 @@
                     "type": "ViewContainerRef",
                     "optional": false,
                     "description": "",
-                    "line": 29,
+                    "line": 31,
                     "decorators": [
                         {
                             "name": "ViewChild",
@@ -894,7 +894,17 @@
                     "type": "Type<any> | null",
                     "optional": false,
                     "description": "",
-                    "line": 32
+                    "line": 36
+                },
+                {
+                    "name": "gridConfigurationObject",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "GridConfig<any> | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 33
                 }
             ],
             "methodsClass": [
@@ -911,7 +921,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 49,
+                    "line": 53,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -935,7 +945,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 41,
+                    "line": 45,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -945,7 +955,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 39,
+                    "line": 43,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -955,7 +965,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 60,
+                    "line": 72,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -968,7 +978,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 55,
+                    "line": 67,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -985,7 +995,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\n  Component,\n  OnInit,\n  Input,\n  Output,\n  EventEmitter,\n  ViewChild,\n  ComponentFactoryResolver,\n  Type,\n  ViewContainerRef,\n  AfterViewInit,\n} from '@angular/core';\nimport { MatDialogRef } from '@angular/material/dialog';\n\nimport { DialogInput } from '../../../interfaces/dialog.interface';\n\n@Component({\n  selector: 'app-general-dialog',\n  templateUrl: './general-dialog.component.html',\n  styleUrls: ['./general-dialog.component.scss'],\n})\nexport class GeneralDialogComponent implements OnInit, AfterViewInit {\n  @Input() dialogInput: DialogInput | null = null;\n\n  @Output() save = new EventEmitter<void>();\n  @Output() cancel = new EventEmitter<void>();\n\n  @ViewChild('dialogContent', { read: ViewContainerRef })\n  dialogContentContainer!: ViewContainerRef;\n\n  // contains the component to be rendered dynamically\n  dynamicComponent: Type<any> | null = null;\n\n  constructor(\n    private dialogRef: MatDialogRef<GeneralDialogComponent>,\n    private resolver: ComponentFactoryResolver\n  ) {}\n\n  ngOnInit(): void {}\n\n  ngAfterViewInit(): void {\n    setTimeout(() => {\n      if (this.dialogInput && this.dialogInput?.component) {\n        this.loadDynamicComponent(this.dialogInput?.component);\n      }\n    });\n  }\n\n  public loadDynamicComponent(component: Type<any>): void {\n    const componentFactory = this.resolver.resolveComponentFactory(component);\n    this.dialogContentContainer.clear();\n    this.dialogContentContainer.createComponent(componentFactory);\n  }\n\n  public onSave(): void {\n    this.save.emit();\n    this.dialogRef.close();\n  }\n\n  public onCancel(): void {\n    this.cancel.emit();\n    this.dialogRef.close();\n  }\n}\n",
+            "sourceCode": "import {\n  Component,\n  OnInit,\n  Input,\n  Output,\n  EventEmitter,\n  ViewChild,\n  ComponentFactoryResolver,\n  Type,\n  ViewContainerRef,\n  AfterViewInit,\n} from '@angular/core';\nimport { MatDialogRef } from '@angular/material/dialog';\n\nimport { DialogInput } from '../../../interfaces/dialog.interface';\nimport { GridConfig } from 'src/app/interfaces/grid.interface';\nimport { defaultGridConfig } from '../../variables/main-grid.variables';\n\n@Component({\n  selector: 'app-general-dialog',\n  templateUrl: './general-dialog.component.html',\n  styleUrls: ['./general-dialog.component.scss'],\n})\nexport class GeneralDialogComponent implements OnInit, AfterViewInit {\n  @Input() dialogInput: DialogInput | null = null;\n\n  @Output() save = new EventEmitter<void>();\n  @Output() cancel = new EventEmitter<void>();\n\n  @ViewChild('dialogContent', { read: ViewContainerRef })\n  dialogContentContainer!: ViewContainerRef;\n\n  gridConfigurationObject: GridConfig<any> | null = null;\n\n  // contains the component to be rendered dynamically\n  dynamicComponent: Type<any> | null = null;\n\n  constructor(\n    private dialogRef: MatDialogRef<GeneralDialogComponent>,\n    private resolver: ComponentFactoryResolver\n  ) {}\n\n  ngOnInit(): void {}\n\n  ngAfterViewInit(): void {\n    setTimeout(() => {\n      if (this.dialogInput && this.dialogInput?.component) {\n        this.loadDynamicComponent(this.dialogInput?.component);\n      }\n    });\n  }\n\n  public loadDynamicComponent(component: Type<any>): void {\n    const componentFactory = this.resolver.resolveComponentFactory(component);\n\n    this.dialogContentContainer.clear();\n    const componentRef =\n      this.dialogContentContainer.createComponent(componentFactory);\n\n    if (this.gridConfigurationObject) {\n      componentRef.instance.gridConfig = this.gridConfigurationObject;\n    } else {\n      componentRef.instance.gridConfig = defaultGridConfig;\n    }\n  }\n\n  public onSave(): void {\n    this.save.emit();\n    this.dialogRef.close();\n  }\n\n  public onCancel(): void {\n    this.cancel.emit();\n    this.dialogRef.close();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1013,7 +1023,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 32,
+                "line": 36,
                 "jsdoctags": [
                     {
                         "name": "dialogRef",
@@ -1044,7 +1054,7 @@
         },
         {
             "name": "GeneralGridComponent",
-            "id": "component-GeneralGridComponent-26fa6c8576d72af49e5b5ecc1b33bf57e35966849054cb4d20e37096a9cab8b2b417831f0736f1ce77a2d1e93cd5a64f49f90318a99ba949a2df6a2367c5b569",
+            "id": "component-GeneralGridComponent-e7c2753c9f8fc17e6fdf1daae1442ee1d679e909d0c2b5efa5a8c21e0288d08d397fcb67b95a873b6142b089013a8026c7d2860e69808edab17e37ca82a22f09",
             "file": "src/app/shared/grids/general-grid/general-grid.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1175,7 +1185,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\nimport { GridApi, ColumnApi, GridOptions } from 'ag-grid-community';\n\nimport { GridConfig } from '../../../interfaces/grid.interface';\nimport {\n  defaultColumns,\n  defaultGridConfig,\n} from '../../variables/main-grid.variables';\n\n@Component({\n  selector: 'app-general-grid',\n  templateUrl: './general-grid.component.html',\n  styleUrls: ['./general-grid.component.scss'],\n})\nexport class GeneralGridComponent<T> implements OnInit {\n  private gridApi: GridApi | null = null;\n  private gridColumnApi: ColumnApi | null = null;\n  private gridOptions: GridOptions | null = null;\n\n  @Input() set gridConfig(value: GridConfig<T> | null) {\n    this._gridConfig = {\n      ...defaultGridConfig,\n      ...value,\n      gridOptions: {\n        ...defaultGridConfig.gridOptions,\n        columnDefs: defaultColumns, // Ensuring default columns are used\n        ...value?.gridOptions,\n      },\n    };\n  }\n\n  constructor() {}\n\n  ngOnInit(): void {}\n\n  get gridConfig(): GridConfig<T> | null {\n    return this._gridConfig;\n  }\n\n  private _gridConfig: GridConfig<T> | null = defaultGridConfig;\n\n  onGridReady(params: any): void {\n    this.gridApi = params.api;\n    this.gridColumnApi = params.columnApi;\n\n    params.api.hideOverlay();\n  }\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\nimport { GridApi, ColumnApi, GridOptions } from 'ag-grid-community';\n\nimport { GridConfig } from '../../../interfaces/grid.interface';\nimport {\n  defaultColumns,\n  defaultGridConfig,\n} from '../../variables/main-grid.variables';\n\n@Component({\n  selector: 'app-general-grid',\n  templateUrl: './general-grid.component.html',\n  styleUrls: ['./general-grid.component.scss'],\n})\nexport class GeneralGridComponent<T> implements OnInit {\n  private gridApi: GridApi | null = null;\n  private gridColumnApi: ColumnApi | null = null;\n  private gridOptions: GridOptions | null = null;\n\n  @Input() set gridConfig(value: GridConfig<T> | null) {\n    this._gridConfig = {\n      ...defaultGridConfig,\n      ...value,\n      gridOptions: {\n        ...defaultGridConfig.gridOptions,\n        columnDefs: value?.gridOptions?.columnDefs || defaultColumns,\n      },\n      rows: value?.rows || [],\n    };\n  }\n\n  constructor() {}\n\n  ngOnInit(): void {}\n\n  get gridConfig(): GridConfig<T> | null {\n    return this._gridConfig;\n  }\n\n  private _gridConfig: GridConfig<T> | null = defaultGridConfig;\n\n  onGridReady(params: any): void {\n    this.gridApi = params.api;\n    this.gridColumnApi = params.columnApi;\n\n    params.api.hideOverlay();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1506,42 +1516,6 @@
                     "elements": []
                 }
             ]
-        },
-        {
-            "name": "DialogStoryBookModule",
-            "id": "module-DialogStoryBookModule-1d5fa61a3f47139c8be1aa60921d55bd8e262cbfd236a64c750dc89206415ce23b17cea5f8167740a7e1af562817f1d498d8d6c59e5d20e57ffbca13862d0636",
-            "description": "",
-            "deprecationMessage": "",
-            "deprecated": false,
-            "file": "src/stories/components/dialog.stories.ts",
-            "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { Meta, StoryObj, moduleMetadata } from '@storybook/angular';\n\nimport {\n  MatDialogModule,\n  MatDialog,\n  MatDialogRef,\n} from '@angular/material/dialog';\nimport { MatButtonModule } from '@angular/material/button';\nimport { AgGridModule } from 'ag-grid-angular';\n\nimport { GeneralDialogComponent } from '../../app/shared/dialogs/general-dialog/general-dialog.component';\nimport { GeneralGridComponent } from '../../app/shared/grids/general-grid/general-grid.component';\n\n@NgModule({\n  imports: [MatDialogModule, MatButtonModule, AgGridModule],\n})\nclass DialogStoryBookModule {}\n\nconst meta: Meta<GeneralDialogComponent> = {\n  title: 'General Dialog',\n  component: GeneralDialogComponent,\n  decorators: [\n    moduleMetadata({\n      declarations: [GeneralDialogComponent, GeneralGridComponent],\n      imports: [MatDialogModule, MatButtonModule, AgGridModule],\n      providers: [\n        {\n          provide: MatDialogRef,\n          useValue: {},\n        },\n      ],\n    }),\n  ],\n};\n\nexport default meta;\n\nexport const DialogWithGrid: StoryObj<GeneralDialogComponent> = {\n  args: {\n    dialogInput: {\n      title: 'Dialog with Grid',\n      component: GeneralGridComponent,\n    },\n  },\n};\n",
-            "children": [
-                {
-                    "type": "providers",
-                    "elements": []
-                },
-                {
-                    "type": "declarations",
-                    "elements": []
-                },
-                {
-                    "type": "imports",
-                    "elements": []
-                },
-                {
-                    "type": "exports",
-                    "elements": []
-                },
-                {
-                    "type": "bootstrap",
-                    "elements": []
-                },
-                {
-                    "type": "classes",
-                    "elements": []
-                }
-            ]
         }
     ],
     "miscellaneous": {
@@ -1613,7 +1587,7 @@
                 "file": "src/stories/components/dialog.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "StoryObj<GeneralDialogComponent>",
+                "type": "Story",
                 "defaultValue": "{\n  args: {\n    dialogInput: {\n      title: 'Dialog with Grid',\n      component: GeneralGridComponent,\n    },\n  },\n}"
             },
             {
@@ -1806,6 +1780,17 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<GeneralDialogComponent>",
+                "file": "src/stories/components/dialog.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<GeneralGridComponent<any>>",
                 "file": "src/stories/components/grid.stories.ts",
                 "deprecated": false,
@@ -1938,7 +1923,7 @@
                     "file": "src/stories/components/dialog.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "StoryObj<GeneralDialogComponent>",
+                    "type": "Story",
                     "defaultValue": "{\n  args: {\n    dialogInput: {\n      title: 'Dialog with Grid',\n      component: GeneralGridComponent,\n    },\n  },\n}"
                 },
                 {
@@ -2155,6 +2140,19 @@
                     "kind": 183
                 }
             ],
+            "src/stories/components/dialog.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<GeneralDialogComponent>",
+                    "file": "src/stories/components/dialog.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
             "src/stories/components/grid.stories.ts": [
                 {
                     "name": "Story",
@@ -2258,7 +2256,7 @@
                 "linktype": "component",
                 "name": "GeneralDialogComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/12",
+                "coverageCount": "0/13",
                 "status": "low"
             },
             {

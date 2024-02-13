@@ -2,6 +2,8 @@
 @import "ag-grid-community/styles/ag-grid.css";
 @import "ag-grid-community/styles/ag-theme-alpine.css";
 
+$default-button-margin: 0.3rem;
+
 html,
 body {
   height: 100%;
@@ -15,4 +17,16 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.left-btn {
+  margin-right: $default-button-margin;
+}
+
+.middle-btn {
+  margin: 0 $default-button-margin;
+}
+
+.right-btn {
+  margin-left: $default-button-margin;
 }
