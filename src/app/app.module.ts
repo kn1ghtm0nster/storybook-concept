@@ -9,9 +9,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GeneralGridComponent } from './shared/grids/general-grid/general-grid.component';
 import { GeneralDialogComponent } from './shared/dialogs/general-dialog/general-dialog.component';
+import { EtlDialogComponent } from './shared/dialogs/etl-dialog/etl-dialog.component';
+import { ModelDialogComponent } from './shared/dialogs/model-dialog/model-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, GeneralGridComponent, GeneralDialogComponent],
+  declarations: [
+    AppComponent,
+    GeneralGridComponent,
+    GeneralDialogComponent,
+    EtlDialogComponent,
+    ModelDialogComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
