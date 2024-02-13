@@ -386,7 +386,249 @@
     "injectables": [],
     "guards": [],
     "interceptors": [],
-    "classes": [],
+    "classes": [
+        {
+            "name": "GenericRowStrategy",
+            "id": "class-GenericRowStrategy-59741a9ae265d8e0faa40a8001cd572257524597206ad252a27430c5512a7d31c6b596d2faffbebba2154c9e6bbdbddcab794e9b1f760284e455bf25eb86d4b5",
+            "file": "src/app/models/row-strategy.model.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "import { GridApi } from 'ag-grid-community';\n\nimport { RowStrategy } from '../interfaces/row-strategy.interface';\n\nexport class GenericRowStrategy<T> implements RowStrategy<T> {\n  public addRow(\n    gridApi: GridApi,\n    rowData: T[],\n    orderedGrid?: boolean,\n    columns: T[] = []\n  ): T[] {\n    const newRow = this.createNewRow(columns);\n    const updatedRowData = [...rowData, newRow];\n    gridApi.setRowData(updatedRowData);\n    if (orderedGrid) {\n      return this.updateRowOrder(gridApi, updatedRowData);\n    }\n    return updatedRowData;\n  }\n\n  public removeRow(\n    gridApi: GridApi<any>,\n    rowData: T[],\n    rowsToRemove?: T[] | undefined\n  ): T[] {\n    const transaction = {\n      remove: rowsToRemove,\n    };\n\n    gridApi.applyTransaction(transaction);\n\n    // if grid uses sequential ordering, update the row order accordingly\n    let updatedRows: T[] = [];\n    gridApi.forEachNodeAfterFilterAndSort((rowNode, index) => {\n      let singleRow = rowNode.data;\n\n      if ('ETL_SEQ_NUM' in singleRow) {\n        singleRow.ETL_SEQ_NUM = index + 1;\n      }\n\n      updatedRows.push(singleRow);\n    });\n\n    gridApi.applyTransaction({ update: updatedRows });\n    return updatedRows;\n  }\n\n  public updateRowOrder(gridApi: GridApi<any>, rowData: T[]): T[] {\n    let updatedRows: T[] = [];\n\n    gridApi.forEachNode((rowNode, index) => {\n      let singleRow = rowNode.data;\n\n      // if grid uses sequential ordering, update row order accordingly\n      if ('ETL_SEQ_NUM' in singleRow) {\n        singleRow.ETL_SEQ_NUM = index + 1;\n      }\n\n      updatedRows.push(singleRow);\n    });\n\n    return updatedRows;\n  }\n\n  private createNewRow(columns: T[]): T {\n    const newRow: any = {};\n    columns.forEach((column) => {\n      newRow[column] = '';\n    });\n    return newRow;\n  }\n}\n",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "addRow",
+                    "args": [
+                        {
+                            "name": "gridApi",
+                            "type": "GridApi",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "rowData",
+                            "type": "T[]",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "orderedGrid",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        },
+                        {
+                            "name": "columns",
+                            "type": "T[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "defaultValue": "[]"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "T[]",
+                    "typeParameters": [],
+                    "line": 6,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        125
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "gridApi",
+                            "type": "GridApi",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "rowData",
+                            "type": "T[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "orderedGrid",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "columns",
+                            "type": "T[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "defaultValue": "[]",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "createNewRow",
+                    "args": [
+                        {
+                            "name": "columns",
+                            "type": "T[]",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "T",
+                    "typeParameters": [],
+                    "line": 65,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "columns",
+                            "type": "T[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "removeRow",
+                    "args": [
+                        {
+                            "name": "gridApi",
+                            "type": "GridApi<any>",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "rowData",
+                            "type": "T[]",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "rowsToRemove",
+                            "type": "T[] | undefined",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "T[]",
+                    "typeParameters": [],
+                    "line": 21,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        125
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "gridApi",
+                            "type": "GridApi<any>",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "rowData",
+                            "type": "T[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "rowsToRemove",
+                            "type": "T[] | undefined",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "updateRowOrder",
+                    "args": [
+                        {
+                            "name": "gridApi",
+                            "type": "GridApi<any>",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "rowData",
+                            "type": "T[]",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "T[]",
+                    "typeParameters": [],
+                    "line": 48,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        125
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "gridApi",
+                            "type": "GridApi<any>",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "rowData",
+                            "type": "T[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "indexSignatures": [],
+            "extends": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "implements": [
+                "RowStrategy"
+            ]
+        }
+    ],
     "directives": [],
     "components": [
         {
@@ -579,7 +821,7 @@
         },
         {
             "name": "GeneralDialogComponent",
-            "id": "component-GeneralDialogComponent-19f0cf6d41252171d24406688f8863b633244032a582527e41d983e4272952ee524f44b297dd7fa9af9308f9727bce85bb0d2c2df288d3f9a2c54ca8f91f43aa",
+            "id": "component-GeneralDialogComponent-68f49609748552c6119d7b079d12dbdbcf80b9e1d5fce21ae5fddf48faf3ccc242bc12f7ebea518594d813fe34b98f28b0458befb1e8cfff2367665979f0c6f3",
             "file": "src/app/shared/dialogs/general-dialog/general-dialog.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -602,7 +844,7 @@
                     "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 21,
+                    "line": 23,
                     "type": "DialogInput | null",
                     "decorators": []
                 }
@@ -613,7 +855,7 @@
                     "defaultValue": "new EventEmitter<void>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 24,
+                    "line": 26,
                     "type": "EventEmitter"
                 },
                 {
@@ -621,11 +863,29 @@
                     "defaultValue": "new EventEmitter<void>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 23,
+                    "line": 25,
                     "type": "EventEmitter"
                 }
             ],
             "propertiesClass": [
+                {
+                    "name": "dialogContentContainer",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ViewContainerRef",
+                    "optional": false,
+                    "description": "",
+                    "line": 29,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'dialogContent', {read: ViewContainerRef}"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ]
+                },
                 {
                     "name": "dynamicComponent",
                     "defaultValue": "null",
@@ -634,17 +894,58 @@
                     "type": "Type<any> | null",
                     "optional": false,
                     "description": "",
-                    "line": 27
+                    "line": 32
                 }
             ],
             "methodsClass": [
+                {
+                    "name": "loadDynamicComponent",
+                    "args": [
+                        {
+                            "name": "component",
+                            "type": "Type<any>",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 49,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        125
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "component",
+                            "type": "Type<any>",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ngAfterViewInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 41,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
                 {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 34,
+                    "line": 39,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -654,9 +955,12 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 43,
+                    "line": 60,
                     "deprecated": false,
-                    "deprecationMessage": ""
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        125
+                    ]
                 },
                 {
                     "name": "onSave",
@@ -664,9 +968,12 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 38,
+                    "line": 55,
                     "deprecated": false,
-                    "deprecationMessage": ""
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        125
+                    ]
                 }
             ],
             "deprecated": false,
@@ -678,7 +985,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\n  Component,\n  OnInit,\n  Input,\n  Output,\n  EventEmitter,\n  ViewChild,\n  ComponentFactoryResolver,\n  Type,\n} from '@angular/core';\nimport { MatDialogRef } from '@angular/material/dialog';\n\nimport { DialogInput } from '../../../interfaces/dialog.interface';\n\n@Component({\n  selector: 'app-general-dialog',\n  templateUrl: './general-dialog.component.html',\n  styleUrls: ['./general-dialog.component.scss'],\n})\nexport class GeneralDialogComponent implements OnInit {\n  @Input() dialogInput: DialogInput | null = null;\n\n  @Output() save = new EventEmitter<void>();\n  @Output() cancel = new EventEmitter<void>();\n\n  // contains the component to be rendered dynamically\n  dynamicComponent: Type<any> | null = null;\n\n  constructor(\n    private dialogRef: MatDialogRef<GeneralDialogComponent>,\n    private resolver: ComponentFactoryResolver\n  ) {}\n\n  ngOnInit(): void {\n    this.dynamicComponent = this.dialogInput?.component || null;\n  }\n\n  onSave(): void {\n    this.save.emit();\n    this.dialogRef.close();\n  }\n\n  onCancel(): void {\n    this.cancel.emit();\n    this.dialogRef.close();\n  }\n}\n",
+            "sourceCode": "import {\n  Component,\n  OnInit,\n  Input,\n  Output,\n  EventEmitter,\n  ViewChild,\n  ComponentFactoryResolver,\n  Type,\n  ViewContainerRef,\n  AfterViewInit,\n} from '@angular/core';\nimport { MatDialogRef } from '@angular/material/dialog';\n\nimport { DialogInput } from '../../../interfaces/dialog.interface';\n\n@Component({\n  selector: 'app-general-dialog',\n  templateUrl: './general-dialog.component.html',\n  styleUrls: ['./general-dialog.component.scss'],\n})\nexport class GeneralDialogComponent implements OnInit, AfterViewInit {\n  @Input() dialogInput: DialogInput | null = null;\n\n  @Output() save = new EventEmitter<void>();\n  @Output() cancel = new EventEmitter<void>();\n\n  @ViewChild('dialogContent', { read: ViewContainerRef })\n  dialogContentContainer!: ViewContainerRef;\n\n  // contains the component to be rendered dynamically\n  dynamicComponent: Type<any> | null = null;\n\n  constructor(\n    private dialogRef: MatDialogRef<GeneralDialogComponent>,\n    private resolver: ComponentFactoryResolver\n  ) {}\n\n  ngOnInit(): void {}\n\n  ngAfterViewInit(): void {\n    setTimeout(() => {\n      if (this.dialogInput && this.dialogInput?.component) {\n        this.loadDynamicComponent(this.dialogInput?.component);\n      }\n    });\n  }\n\n  public loadDynamicComponent(component: Type<any>): void {\n    const componentFactory = this.resolver.resolveComponentFactory(component);\n    this.dialogContentContainer.clear();\n    this.dialogContentContainer.createComponent(componentFactory);\n  }\n\n  public onSave(): void {\n    this.save.emit();\n    this.dialogRef.close();\n  }\n\n  public onCancel(): void {\n    this.cancel.emit();\n    this.dialogRef.close();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -706,7 +1013,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 27,
+                "line": 32,
                 "jsdoctags": [
                     {
                         "name": "dialogRef",
@@ -730,13 +1037,14 @@
             },
             "extends": [],
             "implements": [
-                "OnInit"
+                "OnInit",
+                "AfterViewInit"
             ],
-            "templateData": "<div class=\"top-row\">\n    <h2 mat-dialog-title>\n        {{ dialogInput?.title }}\n    </h2>\n\n    <mat-dialog-actions>\n        <button mat-button>Cancel</button>\n        <button mat-button>Save</button>\n    </mat-dialog-actions>\n</div>\n\n<ng-template #dialogContent></ng-template>"
+            "templateData": "<div class=\"dialog-header-row\">\n    <h2 mat-dialog-title>\n        {{ dialogInput?.title }}\n    </h2>\n\n    <mat-dialog-actions>\n        <button mat-flat-button color=\"warn\" (click)=\"onCancel()\" style=\"margin-right: 0.3rem\">Cancel</button>\n        <button mat-flat-button color=\"primary\" (click)=\"onSave()\" style=\"margin-left: 0.3rem\">Save</button>\n    </mat-dialog-actions>\n</div>\n\n<ng-template #dialogContent></ng-template>"
         },
         {
             "name": "GeneralGridComponent",
-            "id": "component-GeneralGridComponent-a26b1341fc8965969548d83053c4d7adfea9193b0a2240eac3875508f318dcfb27fd16010da14dd46b1e69ca215b553f2d667d0b164d1570619c51d5cf93fa7d",
+            "id": "component-GeneralGridComponent-26fa6c8576d72af49e5b5ecc1b33bf57e35966849054cb4d20e37096a9cab8b2b417831f0736f1ce77a2d1e93cd5a64f49f90318a99ba949a2df6a2367c5b569",
             "file": "src/app/shared/grids/general-grid/general-grid.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -753,10 +1061,111 @@
             ],
             "viewProviders": [],
             "hostDirectives": [],
-            "inputsClass": [],
+            "inputsClass": [
+                {
+                    "name": "gridConfig",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "GridConfig | null",
+                    "decorators": []
+                }
+            ],
             "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "_gridConfig",
+                    "defaultValue": "defaultGridConfig",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "GridConfig<T> | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 40,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "gridApi",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "GridApi | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 16,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "gridColumnApi",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ColumnApi | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 17,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "gridOptions",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "GridOptions | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 18,
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 34,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onGridReady",
+                    "args": [
+                        {
+                            "name": "params",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 42,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "params",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -766,7 +1175,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-general-grid',\n  templateUrl: './general-grid.component.html',\n  styleUrls: ['./general-grid.component.scss']\n})\nexport class GeneralGridComponent {\n\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\nimport { GridApi, ColumnApi, GridOptions } from 'ag-grid-community';\n\nimport { GridConfig } from '../../../interfaces/grid.interface';\nimport {\n  defaultColumns,\n  defaultGridConfig,\n} from '../../variables/main-grid.variables';\n\n@Component({\n  selector: 'app-general-grid',\n  templateUrl: './general-grid.component.html',\n  styleUrls: ['./general-grid.component.scss'],\n})\nexport class GeneralGridComponent<T> implements OnInit {\n  private gridApi: GridApi | null = null;\n  private gridColumnApi: ColumnApi | null = null;\n  private gridOptions: GridOptions | null = null;\n\n  @Input() set gridConfig(value: GridConfig<T> | null) {\n    this._gridConfig = {\n      ...defaultGridConfig,\n      ...value,\n      gridOptions: {\n        ...defaultGridConfig.gridOptions,\n        columnDefs: defaultColumns, // Ensuring default columns are used\n        ...value?.gridOptions,\n      },\n    };\n  }\n\n  constructor() {}\n\n  ngOnInit(): void {}\n\n  get gridConfig(): GridConfig<T> | null {\n    return this._gridConfig;\n  }\n\n  private _gridConfig: GridConfig<T> | null = defaultGridConfig;\n\n  onGridReady(params: any): void {\n    this.gridApi = params.api;\n    this.gridColumnApi = params.columnApi;\n\n    params.api.hideOverlay();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -775,8 +1184,57 @@
                 }
             ],
             "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 30
+            },
             "extends": [],
-            "templateData": "<div class=\"grid-container\">\n    <div class=\"top-row-container\">\n        <div>\n            <button> Edit </button>\n        </div>\n\n        <div>\n            <button>Remove</button>\n            <button>Add</button>\n        </div>\n\n        <div>\n            <button>\n                View\n            </button>\n        </div>\n    </div>\n\n    <ag-grid-angular></ag-grid-angular>\n</div>"
+            "implements": [
+                "OnInit"
+            ],
+            "accessors": {
+                "gridConfig": {
+                    "name": "gridConfig",
+                    "setSignature": {
+                        "name": "gridConfig",
+                        "type": "void",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "args": [
+                            {
+                                "name": "value",
+                                "type": "GridConfig<T> | null",
+                                "deprecated": false,
+                                "deprecationMessage": ""
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 20,
+                        "jsdoctags": [
+                            {
+                                "name": "value",
+                                "type": "GridConfig<T> | null",
+                                "deprecated": false,
+                                "deprecationMessage": "",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    },
+                    "getSignature": {
+                        "name": "gridConfig",
+                        "type": "",
+                        "returnType": "GridConfig | null",
+                        "line": 36
+                    }
+                }
+            },
+            "templateData": "<div class=\"grid-container\">\n    <div class=\"top-row-container\">\n        <div>\n            <button> Edit </button>\n        </div>\n\n        <div>\n            <button>Remove</button>\n            <button>Add</button>\n        </div>\n\n        <div>\n            <button>\n                View\n            </button>\n        </div>\n    </div>\n\n    <ag-grid-angular style=\"height: 350px; width: 100%;\" class=\"ag-theme-alpine\" [gridOptions]=\"gridConfig?.gridOptions\"\n        [rowData]=\"gridConfig?.rows\" [columnDefs]=\"gridConfig?.gridOptions?.columnDefs\"\n        [defaultColDef]=\"gridConfig?.gridOptions?.defaultColDef\" (gridReady)=\"onGridReady($event)\"\n        (firstDataRendered)=\"gridConfig?.gridOptions?.onFirstDataRendered($event)\"></ag-grid-angular>\n</div>"
         },
         {
             "name": "HeaderComponent",
@@ -1051,13 +1509,13 @@
         },
         {
             "name": "DialogStoryBookModule",
-            "id": "module-DialogStoryBookModule-63562d7ea315a89af8a02f85ab2f3857f8875ed72a086a14847e734edb8f0a646fa5930a70ffb88eaf29ba0d3cf9ddace411612be4efcf8a3249706df535fcc8",
+            "id": "module-DialogStoryBookModule-1d5fa61a3f47139c8be1aa60921d55bd8e262cbfd236a64c750dc89206415ce23b17cea5f8167740a7e1af562817f1d498d8d6c59e5d20e57ffbca13862d0636",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/stories/components/dialog.stories.ts",
             "methods": [],
-            "sourceCode": "import { Component, Injector, NgModule } from '@angular/core';\nimport { Meta, StoryObj, moduleMetadata } from '@storybook/angular';\n\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport {\n  MatDialogModule,\n  MatDialog,\n  MatDialogRef,\n} from '@angular/material/dialog';\n\nimport { GeneralDialogComponent } from '../../app/shared/dialogs/general-dialog/general-dialog.component';\nimport { GeneralGridComponent } from '../../app/shared/grids/general-grid/general-grid.component';\n\n@NgModule({\n  declarations: [],\n  imports: [BrowserAnimationsModule, MatDialogModule],\n})\nclass DialogStoryBookModule {}\n\nconst meta: Meta<GeneralDialogComponent> = {\n  title: 'General Dialog',\n  component: GeneralDialogComponent,\n  decorators: [\n    moduleMetadata({\n      declarations: [],\n      imports: [\n        DialogStoryBookModule,\n        MatDialogModule,\n        BrowserAnimationsModule,\n      ],\n      providers: [\n        {\n          provide: MatDialogRef,\n          useValue: {},\n        },\n        MatDialog,\n      ],\n    }),\n  ],\n  argTypes: {},\n};\n\nexport default meta;\n\nexport const BaseGeneralDialogStory: StoryObj<GeneralDialogComponent> = {\n  args: {\n    dialogInput: {\n      title: 'Dialog Title Here',\n      component: GeneralGridComponent,\n    },\n  },\n};\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { Meta, StoryObj, moduleMetadata } from '@storybook/angular';\n\nimport {\n  MatDialogModule,\n  MatDialog,\n  MatDialogRef,\n} from '@angular/material/dialog';\nimport { MatButtonModule } from '@angular/material/button';\nimport { AgGridModule } from 'ag-grid-angular';\n\nimport { GeneralDialogComponent } from '../../app/shared/dialogs/general-dialog/general-dialog.component';\nimport { GeneralGridComponent } from '../../app/shared/grids/general-grid/general-grid.component';\n\n@NgModule({\n  imports: [MatDialogModule, MatButtonModule, AgGridModule],\n})\nclass DialogStoryBookModule {}\n\nconst meta: Meta<GeneralDialogComponent> = {\n  title: 'General Dialog',\n  component: GeneralDialogComponent,\n  decorators: [\n    moduleMetadata({\n      declarations: [GeneralDialogComponent, GeneralGridComponent],\n      imports: [MatDialogModule, MatButtonModule, AgGridModule],\n      providers: [\n        {\n          provide: MatDialogRef,\n          useValue: {},\n        },\n      ],\n    }),\n  ],\n};\n\nexport default meta;\n\nexport const DialogWithGrid: StoryObj<GeneralDialogComponent> = {\n  args: {\n    dialogInput: {\n      title: 'Dialog with Grid',\n      component: GeneralGridComponent,\n    },\n  },\n};\n",
             "children": [
                 {
                     "type": "providers",
@@ -1088,26 +1546,6 @@
     ],
     "miscellaneous": {
         "variables": [
-            {
-                "name": "BaseGeneralDialogStory",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/components/dialog.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "StoryObj<GeneralDialogComponent>",
-                "defaultValue": "{\n  args: {\n    dialogInput: {\n      title: 'Dialog Title Here',\n      component: GeneralGridComponent,\n    },\n  },\n}"
-            },
-            {
-                "name": "BaseGeneralGridStory",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/components/grid.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {},\n}"
-            },
             {
                 "name": "defaultColumnConfiguration",
                 "ctype": "miscellaneous",
@@ -1149,6 +1587,16 @@
                 "defaultValue": "{\n  defaultColDef: defaultColumnConfiguration,\n  onFirstDataRendered: onFirstDataRendered,\n  cacheQuickFilter: true,\n  rowSelection: 'multiple',\n  enableBrowserTooltips: true,\n  overlayLoadingTemplate:\n    '<span class=\"ag-overlay-loading-center\">Please wait while data loads</span>',\n  headerHeight: 25,\n  rowHeight: 40,\n}"
             },
             {
+                "name": "DefaultGridUseCase",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/components/grid.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    gridConfig: {\n      ...defaultGridConfig,\n      gridOptions: { ...defaultGridConfig.gridOptions },\n    },\n  },\n}"
+            },
+            {
                 "name": "defaultOnGridReady",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -1157,6 +1605,16 @@
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "(params: FirstDataRenderedEvent): void => {\n  params.api!.hideOverlay();\n}"
+            },
+            {
+                "name": "DialogWithGrid",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/components/dialog.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<GeneralDialogComponent>",
+                "defaultValue": "{\n  args: {\n    dialogInput: {\n      title: 'Dialog with Grid',\n      component: GeneralGridComponent,\n    },\n  },\n}"
             },
             {
                 "name": "Large",
@@ -1246,7 +1704,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<GeneralDialogComponent>",
-                "defaultValue": "{\n  title: 'General Dialog',\n  component: GeneralDialogComponent,\n  decorators: [\n    moduleMetadata({\n      declarations: [],\n      imports: [\n        DialogStoryBookModule,\n        MatDialogModule,\n        BrowserAnimationsModule,\n      ],\n      providers: [\n        {\n          provide: MatDialogRef,\n          useValue: {},\n        },\n        MatDialog,\n      ],\n    }),\n  ],\n  argTypes: {},\n}"
+                "defaultValue": "{\n  title: 'General Dialog',\n  component: GeneralDialogComponent,\n  decorators: [\n    moduleMetadata({\n      declarations: [GeneralDialogComponent, GeneralGridComponent],\n      imports: [MatDialogModule, MatButtonModule, AgGridModule],\n      providers: [\n        {\n          provide: MatDialogRef,\n          useValue: {},\n        },\n      ],\n    }),\n  ],\n}"
             },
             {
                 "name": "meta",
@@ -1255,8 +1713,8 @@
                 "file": "src/stories/components/grid.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<GeneralGridComponent>",
-                "defaultValue": "{\n  component: GeneralGridComponent,\n}"
+                "type": "Meta<GeneralGridComponent<any>>",
+                "defaultValue": "{\n  title: 'Grid Component',\n  component: GeneralGridComponent,\n  decorators: [\n    moduleMetadata({\n      declarations: [GeneralGridComponent],\n      imports: [AgGridModule],\n    }),\n  ],\n  argTypes: {\n    gridConfig: {\n      control: 'object',\n      description: 'The grid configuration object',\n    },\n  },\n}"
             },
             {
                 "name": "onFirstDataRendered",
@@ -1348,7 +1806,7 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<GeneralGridComponent>",
+                "rawtype": "StoryObj<GeneralGridComponent<any>>",
                 "file": "src/stories/components/grid.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1388,50 +1846,6 @@
             }
         ],
         "groupedVariables": {
-            "src/stories/components/dialog.stories.ts": [
-                {
-                    "name": "BaseGeneralDialogStory",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/components/dialog.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "StoryObj<GeneralDialogComponent>",
-                    "defaultValue": "{\n  args: {\n    dialogInput: {\n      title: 'Dialog Title Here',\n      component: GeneralGridComponent,\n    },\n  },\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/components/dialog.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<GeneralDialogComponent>",
-                    "defaultValue": "{\n  title: 'General Dialog',\n  component: GeneralDialogComponent,\n  decorators: [\n    moduleMetadata({\n      declarations: [],\n      imports: [\n        DialogStoryBookModule,\n        MatDialogModule,\n        BrowserAnimationsModule,\n      ],\n      providers: [\n        {\n          provide: MatDialogRef,\n          useValue: {},\n        },\n        MatDialog,\n      ],\n    }),\n  ],\n  argTypes: {},\n}"
-                }
-            ],
-            "src/stories/components/grid.stories.ts": [
-                {
-                    "name": "BaseGeneralGridStory",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/components/grid.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {},\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/components/grid.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<GeneralGridComponent>",
-                    "defaultValue": "{\n  component: GeneralGridComponent,\n}"
-                }
-            ],
             "src/app/shared/variables/main-grid.variables.ts": [
                 {
                     "name": "defaultColumnConfiguration",
@@ -1492,6 +1906,50 @@
                     "deprecationMessage": "",
                     "type": "",
                     "defaultValue": "(params: FirstDataRenderedEvent): void => {\n  params.api!.hideOverlay();\n  params.api.autoSizeAllColumns(); // prior to v31 -> params.columnApi.autoSizeAllColumns();\n}"
+                }
+            ],
+            "src/stories/components/grid.stories.ts": [
+                {
+                    "name": "DefaultGridUseCase",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/components/grid.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    gridConfig: {\n      ...defaultGridConfig,\n      gridOptions: { ...defaultGridConfig.gridOptions },\n    },\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/components/grid.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<GeneralGridComponent<any>>",
+                    "defaultValue": "{\n  title: 'Grid Component',\n  component: GeneralGridComponent,\n  decorators: [\n    moduleMetadata({\n      declarations: [GeneralGridComponent],\n      imports: [AgGridModule],\n    }),\n  ],\n  argTypes: {\n    gridConfig: {\n      control: 'object',\n      description: 'The grid configuration object',\n    },\n  },\n}"
+                }
+            ],
+            "src/stories/components/dialog.stories.ts": [
+                {
+                    "name": "DialogWithGrid",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/components/dialog.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<GeneralDialogComponent>",
+                    "defaultValue": "{\n  args: {\n    dialogInput: {\n      title: 'Dialog with Grid',\n      component: GeneralGridComponent,\n    },\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/components/dialog.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<GeneralDialogComponent>",
+                    "defaultValue": "{\n  title: 'General Dialog',\n  component: GeneralDialogComponent,\n  decorators: [\n    moduleMetadata({\n      declarations: [GeneralDialogComponent, GeneralGridComponent],\n      imports: [MatDialogModule, MatButtonModule, AgGridModule],\n      providers: [\n        {\n          provide: MatDialogRef,\n          useValue: {},\n        },\n      ],\n    }),\n  ],\n}"
                 }
             ],
             "src/stories/button.stories.ts": [
@@ -1702,7 +2160,7 @@
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<GeneralGridComponent>",
+                    "rawtype": "StoryObj<GeneralGridComponent<any>>",
                     "file": "src/stories/components/grid.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -1786,12 +2244,21 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/models/row-strategy.model.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "GenericRowStrategy",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/shared/dialogs/general-dialog/general-dialog.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "GeneralDialogComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/9",
+                "coverageCount": "0/12",
                 "status": "low"
             },
             {
@@ -1800,7 +2267,7 @@
                 "linktype": "component",
                 "name": "GeneralGridComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "coverageCount": "0/9",
                 "status": "low"
             },
             {
@@ -1927,7 +2394,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "BaseGeneralDialogStory",
+                "name": "DialogWithGrid",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -1947,7 +2414,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "BaseGeneralGridStory",
+                "name": "DefaultGridUseCase",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
