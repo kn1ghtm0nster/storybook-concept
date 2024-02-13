@@ -17,4 +17,7 @@ export interface GridConfig<T> {
     edit?: boolean;
     new?: boolean;
   };
+  actions?: {
+    onEdit?: (rowData: T | T[]) => void;
+  };
 }
