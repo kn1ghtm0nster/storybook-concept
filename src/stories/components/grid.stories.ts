@@ -1,5 +1,6 @@
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 import { AgGridModule } from 'ag-grid-angular';
+import { MatButtonModule } from '@angular/material/button';
 
 import { GeneralGridComponent } from '../../app/shared/grids/general-grid/general-grid.component';
 
@@ -11,7 +12,7 @@ const meta: Meta<GeneralGridComponent<any>> = {
   decorators: [
     moduleMetadata({
       declarations: [GeneralGridComponent],
-      imports: [AgGridModule],
+      imports: [AgGridModule, MatButtonModule],
     }),
   ],
   argTypes: {

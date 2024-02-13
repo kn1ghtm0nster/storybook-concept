@@ -1,16 +1,11 @@
 <div class="grid-container">
     <div class="top-row-container">
         <div>
-            <button> Edit </button>
+            <button mat-flat-button color="primary">Edit</button>
         </div>
 
         <div>
-            <button>Remove</button>
-            <button>Add</button>
-        </div>
-
-        <div>
-            <button>
+            <button mat-flat-button color="primary">
                 View
             </button>
         </div>
@@ -20,4 +15,12 @@
         [rowData]="gridConfig?.rows" [columnDefs]="gridConfig?.gridOptions?.columnDefs"
         [defaultColDef]="gridConfig?.gridOptions?.defaultColDef" (gridReady)="onGridReady($event)"
         (firstDataRendered)="gridConfig?.gridOptions?.onFirstDataRendered($event)"></ag-grid-angular>
+
+
+    <div class="bottom-row-container">
+        <div>
+            <button mat-flat-button color="warn" class="remove-btn">Remove</button>
+            <button mat-flat-button color="primary" class="add-btn">Add</button>
+        </div>
+    </div>
 </div>

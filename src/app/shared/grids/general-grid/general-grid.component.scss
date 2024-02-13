@@ -1,0 +1,21 @@
+$default-margin: 0.3rem;
+
+.top-row-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: $default-margin;
+}
+
+.bottom-row-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: $default-margin;
+}
+
+.add-btn {
+  margin-left: $default-margin;
+}
+
+.remove-btn {
+  margin-right: $default-margin;
+}
